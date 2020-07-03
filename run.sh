@@ -76,7 +76,7 @@ if [ "$1" = "import" ]; then
     sudo -u renderer osm2pgsql -d gis --create --slim -G --hstore --tag-transform-script /home/renderer/src/openstreetmap-carto/openstreetmap-carto.lua --number-processes ${THREADS:-4} -S /home/renderer/src/openstreetmap-carto/openstreetmap-carto.style /data.osm.pbf ${OSM2PGSQL_EXTRA_ARGS}
 
     # Create indexes
-    sudo -u postgres psql -d gis -f indexes.sql
+    sudo -u postgres psql -d gis -f /indexes.sql
 
     # Register that data has changed for mod_tile caching purposes
     touch /var/lib/mod_tile/planet-import-complete
