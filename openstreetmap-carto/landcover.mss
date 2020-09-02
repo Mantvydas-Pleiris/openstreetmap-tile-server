@@ -14,17 +14,17 @@
 @built-up-lowzoom: @s-l;
 @built-up-z11: @s-l;
 @built-up-z12: @s-l;
-@residential: @s-b;      // Lch(89,0,0)
+@residential: @s-b;      // Lch(75,0,0)
 @residential-line: darken(@residential, 15%); // Lch(75,0,0)
-@retail: @s-b;           // Lch(89,16,30)
+@retail: @s-b;           // Lch(70,16,30)
 @retail-line: darken(@retail, 15%);      // Lch(70,25,30)
-@commercial: @s-b;       // Lch(89,8.5,25)
+@commercial: @s-b;       // Lch(75,8.5,25)
 @commercial-line: darken(@commercial, 15%);  // Lch(75,12,25)
-@industrial: @s-b;       // Lch(89,9,330) (Also used for railway, wastewater_plant)
+@industrial: @s-b;       // Lch(75,9,330) (Also used for railway, wastewater_plant)
 @industrial-line: darken(@industrial, 15%);  // Lch(75,11,330) (Also used for railway-line, wastewater_plant-line)
-@farmland: @s-l;         // Lch(94,14,112)
+@farmland: @s-l;         // Lch(80,14,112)
 @farmland-line: darken(@farmland, 15%);    // Lch(80,14,112)
-@farmyard: @s-l;         // Lch(89,20,80)
+@farmyard: @s-l;         // Lch(75,20,80)
 @farmyard-line: darken(@farmyard, 15%);    // Lch(75,25,80)
 
 // --- Transport ----
@@ -71,17 +71,11 @@
 
 #landcover-low-zoom[zoom < 10],
 #landcover[zoom >= 10] {
-  ::low-zoom[zoom < 10]                   { image-filters: scale-hsla(0,1,0,1,0.6,0.95,0,1); }
-  ::lower-mid-zoom[zoom >= 10][zoom < 11] { image-filters: scale-hsla(0,1,0,1,0.6,0.95,0,1); }
-  ::mid-zoom[zoom >= 11][zoom < 12]       { image-filters: scale-hsla(0,1,0,1,0.5,0.96,0,1); }
-  ::upper-mid-zoom[zoom >= 12][zoom < 13] { image-filters: scale-hsla(0,1,0,1,0.4,0.97,0,1); }
-  ::high-zoom[zoom >= 13]                 { image-filters: scale-hsla(0,1,0,1,0,  1,   0,1); }
+  ::low-zoom[zoom < 6]                   { image-filters: scale-hsla(0,1,0,1,0.6,0.95,0,1); }
+  ::high-zoom[zoom >= 6]                 { image-filters: scale-hsla(0,1,0,1,0,  1,   0,1); }
 
-  ::low-zoom[zoom < 10],
-  ::lower-mid-zoom[zoom >= 10][zoom < 11],
-  ::mid-zoom[zoom >= 11][zoom < 12],
-  ::upper-mid-zoom[zoom >= 12][zoom < 13],
-  ::high-zoom[zoom >= 13] {
+  ::low-zoom[zoom < 6],
+  ::high-zoom[zoom >= 6] {
 
   [feature = 'leisure_swimming_pool'][zoom >= 14] {
     polygon-fill: @water-color;
@@ -93,8 +87,8 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
-  [feature = 'leisure_recreation_ground'][zoom >= 10],
-  [feature = 'landuse_recreation_ground'][zoom >= 10],
+  [feature = 'leisure_recreation_ground'][zoom >= 6],
+  [feature = 'landuse_recreation_ground'][zoom >= 6],
   [feature = 'leisure_playground'][zoom >= 13],
   [feature = 'leisure_fitness_station'][zoom >= 13] {
     polygon-fill: @leisure;
@@ -111,7 +105,7 @@
   [feature = 'tourism_picnic_site'] {
     [zoom >= 10] {
       polygon-fill: @campsite;
-      [zoom >= 13] {
+      [zoom >= 10] {
         line-color: saturate(darken(@campsite, 60%), 30%);
         line-width: 0.3;
       }
@@ -801,7 +795,7 @@
   }
 
   //Also landuse = forest, converted in the SQL
-  [natural = 'wood'][zoom >= 13]::wood {
+  [natural = 'wood'][zoom >= 10]::wood {
     polygon-pattern-file: url('symbols/leaftype_unknown.svg'); // Lch(55,30,135)
     [leaf_type = "broadleaved"] { polygon-pattern-file: url('symbols/leaftype_broadleaved.svg'); }
     [leaf_type = "needleleaved"] { polygon-pattern-file: url('symbols/leaftype_needleleaved.svg'); }
@@ -814,7 +808,7 @@
 
 #landuse-overlay {
   [landuse = 'military'][zoom >= 8][way_pixels > 900],
-  [landuse = 'military'][zoom >= 13],
+  [landuse = 'military'][zoom >= 10],
   [military = 'danger_area'][zoom >= 9] {
     polygon-pattern-file: url('symbols/military_red_hatch.png');
     polygon-pattern-alignment: global;
@@ -834,7 +828,7 @@
 }
 
 #cliffs {
-  [natural = 'cliff'][zoom >= 13] {
+  [natural = 'cliff'][zoom >= 10] {
     line-pattern-file: url('symbols/cliff.svg');
     [zoom >= 15] {
       line-pattern-file: url('symbols/cliff2.svg');

@@ -19,13 +19,13 @@ classes:
   # Colours for output into the MSS file
   mss:
     fill:
-      lightness: [20, 47]
+      lightness: [12, 30]
       chroma: [0, 0]
     casing:
-      lightness: [0, 0]
+      lightness: [0, 30]
       chroma: [0, 0]
     low-zoom:
-      lightness: [12, 42]
+      lightness: [12, 30]
       chroma: [0, 0]
     low-zoom-casing:
       lightness: [0, 30]
@@ -36,7 +36,7 @@ classes:
   # Colours used by the road shields script
   shield:
     fill:
-      lightness: [35, 45]
+      lightness: [20, 30]
       chroma: [0, 0]
     stroke_fill:
       lightness: [20, 30]
